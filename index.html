@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skycast — Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+  <div class="rain-layer" id="rainLayer"></div>
+
+  <div class="wrapper">
+    <header class="header">
+      <div class="logo">Sky<span>cast</span></div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="unit-toggle">
+          <button class="unit-btn active" id="btnC">°C</button>
+          <button class="unit-btn" id="btnF">°F</button>
+        </div>
+        <div class="time-badge" id="liveClock">--:--</div>
+      </div>
+    </header>
+
+    <div class="search-wrap">
+      <input
+        class="search-input"
+        id="locationInput"
+        type="text"
+        placeholder="Enter city, e.g. Lucknow or New York..."
+        autocomplete="off"
+      />
+      <button class="search-btn" id="searchBtn">Search</button>
+    </div>
+
+    <div class="error-msg" id="errorMsg">
+      ⚠ Could not find that location. Please check the name and try again.
+    </div>
+
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      Fetching sky conditions…
+    </div>
+
+    <div class="weather-content" id="weatherContent">
+
+      <div class="hero-card">
+        <div class="location-name">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span id="cityName">—</span>
+        </div>
+        <div class="temp-row">
+          <div class="temp-big" id="tempDisplay">—</div>
+          <div class="temp-unit" id="unitLabel">°C</div>
+          <div style="flex:1"></div>
+          <div class="weather-icon-large" id="weatherEmoji">🌤</div>
+        </div>
+        <div class="weather-desc" id="weatherDesc">—</div>
+        <div class="feels-like" id="feelsLike">Feels like —</div>
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-icon">💧</span>
+            <div class="stat-label">Humidity</div>
+            <div class="stat-value" id="humidityVal">—</div>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">🌬</span>
+            <div class="stat-label">Wind</div>
+            <div class="stat-value" id="windVal">—</div>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">👁</span>
+            <div class="stat-label">Visibility</div>
+            <div class="stat-value" id="visibilityVal">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-row">
+        <div class="info-card">
+          <div class="info-card-label">🌡 Pressure</div>
+          <div class="info-card-value" id="pressureVal">—</div>
+          <div class="info-card-sub">hPa</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🌫 Dew Point</div>
+          <div class="info-card-value" id="dewPointVal">—</div>
+          <div class="info-card-sub" id="dewPointUnit">°C</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">☁ Cloud Cover</div>
+          <div class="info-card-value" id="cloudVal">—</div>
+          <div class="info-card-sub">%</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">🌡 High / Low</div>
+          <div class="info-card-value" id="highLowVal">— / —</div>
+          <div class="info-card-sub">today</div>
+        </div>
+      </div>
+
+      <div class="sun-card">
+        <div class="sun-row">
+          <div class="sun-item">
+            <span class="sun-item-icon">🌅</span>
+            <div class="sun-item-label">Sunrise</div>
+            <div class="sun-item-time" id="sunriseTime">—</div>
+          </div>
+          <div class="sun-divider"></div>
+          <div class="daylight-bar-wrap">
+            <div class="daylight-label" id="daylightLabel">Daylight</div>
+            <div class="daylight-bar">
+              <div class="daylight-fill" id="daylightFill" style="width:50%"></div>
+            </div>
+          </div>
+          <div class="sun-divider"></div>
+          <div class="sun-item">
+            <span class="sun-item-icon">🌇</span>
+            <div class="sun-item-label">Sunset</div>
+            <div class="sun-item-time" id="sunsetTime">—</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="landing" id="landingState">
+      <span class="landing-icon">🌍</span>
+      <div class="landing-title">What's the sky like?</div>
+      <div class="landing-sub">Type any city name above to get live conditions</div>
+    </div>
+
+    <div class="footer">Powered by OpenWeatherMap &nbsp;·&nbsp; Skycast © 2026</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
